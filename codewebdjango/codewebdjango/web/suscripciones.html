@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suscripciones - Gaming Crew TV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #2a2a40;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h1 {
+            color: #f39c12;
+        }
+        form, .thank-you-message {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        input, select, button {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+            width: 100%;
+        }
+        button {
+            background-color: #f39c12;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #d35400;
+        }
+        .thank-you-message {
+            font-size: 1.2rem;
+        }
+        .thank-you-message h2 {
+            color: #f39c12;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Suscríbete</h1>
+        <form id="subscription-form">
+            <label for="host">Selecciona tu Gaming Host:</label>
+            <select id="host" name="host" required>
+                <option value="host1">Gaming Host 1</option>
+                <option value="host2">Gaming Host 2</option>
+                <option value="host3">Gaming Host 3</option>
+            </select>
+            
+            <label for="plan">Selecciona tu plan de suscripción:</label>
+            <select id="plan" name="plan" required>
+                <option value="basico">Básico - $5/mes</option>
+                <option value="premium">Premium - $10/mes</option>
+                <option value="vip">VIP - $20/mes</option>
+            </select>
+            
+            <label for="email">Tu correo electrónico:</label>
+            <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+            
+            <button type="submit">Suscribirme</button>
+        </form>
+        <div class="thank-you-message">
+            <h2>¡Gracias por suscribirte!</h2>
+            <p>Tu apoyo significa mucho para nuestros Gaming Hosts. 🎮✨</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('subscription-form');
+        const thankYouMessage = document.querySelector('.thank-you-message');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evita el envío real del formulario
+            form.classList.remove('active');
+            thankYouMessage.classList.add('active');
+        });
+
+        // Mostrar el formulario al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            form.classList.add('active');
+        });
+    </script>
+</body>
+</html>

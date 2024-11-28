@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Crew TV - Transmisión de Pantalla</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .video-container, .chat-container {
+            height: 100%;
+            overflow-y: auto;
+        }
+        .video-container {
+            width: 75%;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        .chat-container {
+            width: 25%;
+            background-color: #1e1e1e;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        video {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+        }
+        .chat-header {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .chat-box {
+            flex: 1;
+            background-color: #2e2e2e;
+            border-radius: 8px;
+            padding: 10px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .chat-message {
+            margin-bottom: 5px;
+        }
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        .send-button, .share-screen-button, .stop-share-button {
+            background-color: #6200ea;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .send-button:hover, .share-screen-button:hover, .stop-share-button:hover {
+            background-color: #3700b3;
+        }
+        .stop-share-button {
+            margin-top: 10px;
+            display: none; /* Oculto por defecto */
+        }
+    </style>
+</head>
+<body>
+    <!-- este es el contenedor de la transmision en vivo  -->
+    <div class="video-container">
+        <video id="screenVideo" autoplay playsinline></video>
+    </div>
+
+    <!-- y este es el contenedor del chat en vivo  -->
+    <div class="chat-container">
+        <div class="chat-header">Chat en Vivo</div>
+        <div class="chat-box" id="chatBox">
+            <!-- estos serán los mensajes que se mostraran por defecto una vez se inicie la transmision :p -->
+            <div class="chat-message"><strong>persona1:</strong> Hola!</div>
+            <div class="chat-message"><strong>persona2:</strong> buen día a todos! </div>
+            <div class="chat-message"><strong>persona3:</strong> nuevo seguidor bro </div>
+        </div>
+        <div class="chat-input-container">
+        <!-- esta es la funcion para escribir e enviar mensajes -->
+            <input type="text" class="chat-input" id="chatInput" placeholder="Escribe tu mensaje...">
+            <button class="send-button" onclick="sendMessage()">Enviar</button>
+        </div>
+        <button class="share-screen-button" onclick="startScreenShare()">Compartir Pantalla</button>
+        <button class="stop-share-button" id="stopShareButton" onclick="stopScreenShare()">Dejar de Compartir Pantalla</button>
+    </div>
+
+    <script>
+        let screenStream;
+
+        async function startScreenShare() {
+            try {
+                screenStream = await navigator.mediaDevices.getDisplayMedia({
+                    video: true,
+                    audio: true // Opcional, dependiendo si quieres compartir audio
+                });
+                const screenVideo = document.getElementById('screenVideo');
+                screenVideo.srcObject = screenStream;
+
+                // Mostrar el botón "Dejar de Compartir Pantalla"
+                document.getElementById('stopShareButton').style.display = 'block';
+                document.querySelector('.share-screen-button').style.display = 'none';
+
+                // Terminar la transmisión si el usuario deja de compartir
+                screenStream.getVideoTracks()[0].addEventListener('ended', stopScreenShare);
+            } catch (error) {
+                console.error('Error al intentar compartir la pantalla:', error);
+            }
+        }
+
+        function stopScreenShare() {
+            if (screenStream) {
+                const tracks = screenStream.getTracks();
+                tracks.forEach(track => track.stop()); // Detener cada pista de la transmisión
+            }
+            document.getElementById('screenVideo').srcObject = null;
+
+            // Ocultar el botón "Dejar de Compartir Pantalla" y mostrar "Compartir Pantalla"
+            document.getElementById('stopShareButton').style.display = 'none';
+            document.querySelector('.share-screen-button').style.display = 'block';
+
+            alert('Has dejado de compartir la pantalla');
+        }
+
+        function sendMessage() {
+            const chatBox = document.getElementById('chatBox');
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            if (message) {
+                const newMessage = document.createElement('div');
+                newMessage.classList.add('chat-message');
+                newMessage.innerHTML = `<strong>Tú:</strong> ${message}`;
+                chatBox.appendChild(newMessage);
+                chatInput.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>

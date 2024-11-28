@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Crew TV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #1e1e1e;
+            padding: 1em;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        .profile, .live-stream, .chat, .subscriptions, .support, .coins {
+            background-color: #2e2e2e;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .button {
+            background-color: #6200ea;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #3700b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gaming Crew TV</h1>
+        <p>Conecta con tus Gaming Hosts favoritos y disfruta de transmisiones en vivo</p>
+    </header>
+    <div class="container">
+        <!-- Perfil del Gaming Host -->
+        <section class="profile">
+            <h2>Perfil de Gaming Host</h2>
+            <p>Nombre: <strong>Gaming Host 1</strong></p>
+            <p>Programación de transmisiones: Todos los días a las 8 PM</p>
+            <button class="button" onclick="location.href='perfil.html'">Ver perfil completo</button>
+        </section>
+        
+        <!-- Transmisión en vivo -->
+        <section class="live-stream">
+            <h2>Transmisión en Vivo</h2>
+            <p>Disfruta de la transmisión en tiempo real</p>
+            <button class="button" onclick="location.href='chat.html'">Iniciar transmisión</button>
+        </section>
+    
+        
+        <!-- Suscripciones -->
+        <section class="subscriptions">
+            <h2>Suscripciones</h2>
+            <p>Suscríbete para obtener beneficios exclusivos y recibir notificaciones</p>
+            <button class="button" onclick="location.href='suscripciones.html'">Suscribirse</button>
+        </section>
+        
+        <!-- Apoyo Económico -->
+        <section class="support">
+            <h2>Apoyo Económico</h2>
+            <p>Apoya al Gaming Host con un depósito</p>
+            <button class="button" onclick="location.href='apoyo.html'">Hacer un depósito</button>
+        </section>
+        
+        <!-- Gaming Coins -->
+        <section class="coins">
+            <h2>Gaming Coins</h2>
+            <p>Utiliza Gaming Coins para interacciones especiales</p>
+            <button class="button" onclick="location.href='coins.html'">Comprar Gaming Coins</button>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 Gaming Crew TV - Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>

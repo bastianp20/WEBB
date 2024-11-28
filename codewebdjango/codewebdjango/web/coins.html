@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Coins - Gaming Crew TV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #2a2a40;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h1 {
+            color: #f39c12;
+        }
+        .balance {
+            margin: 20px 0;
+            font-size: 1.5rem;
+            color: #f39c12;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        select, button {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+            width: 100%;
+        }
+        button {
+            background-color: #f39c12;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #d35400;
+        }
+        .thank-you {
+            display: none;
+        }
+        .thank-you.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gaming Coins</h1>
+        <p>Usa tus Gaming Coins para interacciones especiales y recompensas únicas en Gaming Crew TV. 🎮✨</p>
+        <div class="balance" id="balance">
+            Saldo: 100 Coins
+        </div>
+        <form id="coins-form">
+            <label for="coins">Selecciona cantidad de Coins para comprar:</label>
+            <select id="coins" required>
+                <option value="50">50 Coins - $5</option>
+                <option value="100">100 Coins - $10</option>
+                <option value="200">200 Coins - $20</option>
+                <option value="500">500 Coins - $50</option>
+            </select>
+            <button type="submit">Comprar Coins</button>
+        </form>
+
+        <div class="thank-you" id="thank-you">
+            <h2>¡Compra exitosa! 💰</h2>
+            <p>Has añadido <span id="added-coins"></span> Coins a tu cuenta.</p>
+        </div>
+    </div>
+
+    <script>
+        const balanceEl = document.getElementById('balance');
+        const coinsForm = document.getElementById('coins-form');
+        const thankYouSection = document.getElementById('thank-you');
+        const addedCoinsEl = document.getElementById('added-coins');
+
+        let currentBalance = 100; // Saldo inicial de Gaming Coins
+
+        // Manejar compra de Coins
+        coinsForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            // Obtener cantidad seleccionada
+            const coinsToAdd = parseInt(document.getElementById('coins').value);
+
+            // Actualizar saldo
+            currentBalance += coinsToAdd;
+            balanceEl.textContent = `Saldo: ${currentBalance} Coins`;
+
+            // Mostrar mensaje de agradecimiento
+            addedCoinsEl.textContent = coinsToAdd;
+            coinsForm.style.display = 'none';
+            thankYouSection.classList.add('active');
+        });
+    </script>
+</body>
+</html>

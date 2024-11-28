@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Gaming Host</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .profile-container {
+            background-color: #2a2a40;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto;
+            border: 3px solid #f39c12;
+        }
+        h1 {
+            color: #f39c12;
+            margin-top: 10px;
+        }
+        .description {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #1b1b2b;
+            border-radius: 10px;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #f39c12;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .stat h3.updating {
+            transform: scale(1.2);
+            color: #d35400;
+        }
+        .stat p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+        .actions {
+            padding: 20px 0;
+        }
+        .actions input {
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            width: 80%;
+            text-align: center;
+        }
+        .actions button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .subscribe {
+            background-color: #f39c12;
+            color: #fff;
+        }
+        .subscribe:hover {
+            background-color: #d35400;
+        }
+        .follow {
+            background-color: #3498db;
+            color: #fff;
+        }
+        .follow:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <img src="https://via.placeholder.com/120" alt="Foto del Gaming Host" class="profile-image">
+        <h1 id="host-name">Nombre del Gaming Host</h1>
+        <p class="description">¡Bienvenidos a mi perfil! Aquí comparto mis sesiones de gaming en vivo y contenido exclusivo para mis seguidores. 🎮✨</p>
+        
+        <div class="stats">
+            <div class="stat">
+                <h3 id="subscriber-count">200</h3>
+                <p>Suscriptores</p>
+            </div>
+            <div class="stat">
+                <h3 id="rating">4.8/5</h3>
+                <p>Calificación</p>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <input type="text" id="name-input" placeholder="Ingresa tu nombre">
+            <button class="subscribe" id="subscribe-btn">Suscribirse</button>
+            <button class="follow">Seguir</button>
+        </div>
+    </div>
+
+    <script>
+        // Elementos del DOM
+        const ratingEl = document.getElementById('rating');
+        const subscriberCountEl = document.getElementById('subscriber-count');
+        const subscribeBtn = document.getElementById('subscribe-btn');
+        const nameInput = document.getElementById('name-input');
+        const hostNameEl = document.getElementById('host-name');
+
+        // Valores iniciales
+        let subscriberCount = 200;
+
+        // Actualizar calificación periódicamente
+        function updateRating() {
+            const newRating = (Math.random() * 0.5 + 4.5).toFixed(1); // Calificación entre 4.5 y 5.0
+            ratingEl.textContent = `${newRating}/5`;
+            ratingEl.classList.add('updating');
+            setTimeout(() => ratingEl.classList.remove('updating'), 300); // Animación breve
+        }
+
+        // Actualizar calificación cada 5 segundos
+        setInterval(updateRating, 5000);
+
+        // Manejar suscripciones
+        subscribeBtn.addEventListener('click', () => {
+            subscriberCount++;
+            subscriberCountEl.textContent = subscriberCount;
+        });
+
+        // Actualizar el nombre del Gaming Host en tiempo real
+        nameInput.addEventListener('input', (event) => {
+            const newName = event.target.value.trim() || "Nombre del Gaming Host";
+            hostNameEl.textContent = newName;
+        });
+    </script>
+</body>
+</html>
